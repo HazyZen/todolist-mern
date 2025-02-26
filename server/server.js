@@ -17,7 +17,7 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
-app.options("/api/*", cors());
+app.options("*", cors(corsOptions));
 
 mongoose.connect(`${mongoUrl}`).then(() => {
   console.log("Connected to database");
