@@ -15,7 +15,9 @@ const corsOptions = {
   origin: "https://todo-mern-frontend-wine.vercel.app",
   credentials: true,
   optionSuccessStatus: 200,
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
+
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
