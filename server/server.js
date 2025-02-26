@@ -10,7 +10,12 @@ const PORT = process.env.PORT || 3000;
 const mongoUrl = process.env.MONGO_ATLAS_URL;
 
 app.use(express.json());
-app.use(cors({ origin: "https://mern-todo-app-zeta.vercel.app/" }));
+app.use(
+  cors({
+    origin: "https://mern-todo-app-zeta.vercel.app",
+    optioinsSuccessStatus: 200,
+  })
+);
 
 mongoose.connect(`${mongoUrl}`).then(() => {
   console.log("Connected to database");
