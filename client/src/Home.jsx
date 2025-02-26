@@ -12,14 +12,14 @@ export const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`${apiUrl}/list`)
+      .get(`${apiUrl}/api/list`)
       .then((result) => setList(result.data))
       .catch((err) => console.log(err));
   }, []);
 
   const handleCheck = async (id) => {
     try {
-      const response = await axios.patch(`${apiUrl}/update/${id}`);
+      const response = await axios.patch(`${apiUrl}/api/update/${id}`);
 
       setList((prevList) =>
         prevList.map((todo) =>
@@ -33,7 +33,7 @@ export const Home = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${apiUrl}/delete/${id}`);
+      await axios.delete(`${apiUrl}/api/delete/${id}`);
       setList((prevList) => prevList.filter((todo) => todo._id !== id));
     } catch (error) {
       console.log(error);
