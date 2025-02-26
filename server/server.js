@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const TodoModel = require("./Models/Todos");
 
 const app = express();
@@ -11,15 +10,26 @@ const mongoUrl = process.env.MONGO_ATLAS_URL;
 
 app.use(express.json());
 
-const corsOptions = {
-  origin: "https://todo-mern-frontend-wine.vercel.app",
-  credentials: true,
-  optionSuccessStatus: 200,
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://todo-mern-frontend-wine.vercel.app"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+  res.setHeader("Access-Control-Max-Age", 7200);
 
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+  next();
+});
 
 mongoose
   .connect(`${mongoUrl}`, { useNewUrlParser: true, useUnifiedTopology: true })
