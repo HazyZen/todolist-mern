@@ -12,7 +12,7 @@ const mongoUrl = process.env.MONGO_ATLAS_URL;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://todo-mern-frontend-wine.vercel.app",
+    origin: ["https://todo-mern-frontend-wine.vercel.app"],
     optioinsSuccessStatus: 200,
   })
 );
