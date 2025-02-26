@@ -10,12 +10,13 @@ const PORT = process.env.PORT || 3000;
 const mongoUrl = process.env.MONGO_ATLAS_URL;
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: ["https://todo-mern-frontend-wine.vercel.app"],
-    optioinsSuccessStatus: 200,
-  })
-);
+
+const corsOptions = {
+  origin: "https://todo-mern-frontend-wine.vercel.app",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 mongoose.connect(`${mongoUrl}`).then(() => {
   console.log("Connected to database");
