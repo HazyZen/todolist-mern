@@ -21,9 +21,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
 
-mongoose.connect(`${mongoUrl}`).then(() => {
-  console.log("Connected to database");
-});
+mongoose
+  .connect(`${mongoUrl}`, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Connected to database");
+  })
+  .catch((err) => console.error("Database connection error: ", err));
 
 app.get("/api", (req, res) => {
   res.status(200).send("TodoList Server");
