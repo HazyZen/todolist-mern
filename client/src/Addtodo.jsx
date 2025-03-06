@@ -15,7 +15,7 @@ const Addtodo = ({ onAdd }) => {
     }
 
     try {
-      const response = await axios.post(`${apiUrl}/todo`, {
+      const response = await axios.post(`${apiUrl}/api/todo`, {
         todo: todo,
       });
 

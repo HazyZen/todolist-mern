@@ -6,13 +6,13 @@ const TodoModel = require("./Models/Todos");
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const mongoUrl = process.env.MONGO_ATLAS_URL;
 
 app.use(express.json());
 
 const corsOptions = {
-  origin: ["https://todo-mern-frontend-wine.vercel.app"],
+  origin: ["https://todolist-mern-frontend.vercel.app"],
   method: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
   credentials: true,
   optionsSuccessStatus: 200,
