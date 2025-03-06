@@ -10,19 +10,10 @@ const PORT = process.env.PORT;
 const mongoUrl = process.env.MONGO_ATLAS_URL;
 
 app.use(express.json());
-
-const corsOptions = {
-  origin: ["https://todolist-mern-frontend.vercel.app"],
-  method: ["GET", "POST", "PATCH", "DELETE", "PUT", "OPTIONS"],
-  credentials: true,
-  optionsSuccessStatus: 200,
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.use(cors());
 
 mongoose
-  .connect(`${mongoUrl}`, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(`${mongoUrl}`)
   .then(() => {
     console.log("Connected to database");
   })
