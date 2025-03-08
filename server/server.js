@@ -10,16 +10,7 @@ const PORT = process.env.PORT;
 const mongoUrl = process.env.MONGO_ATLAS_URL;
 
 app.use(express.json());
-
-const corsOptions = {
-  origin: ["https://todolist-mern-frontend.vercel.app"],
-  method: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  optionsSuccessStatus: 200,
-  credentials: true,
-};
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.use(cors());
 
 mongoose
   .connect(`${mongoUrl}`)
