@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import PropTypes from "prop-types";
 
@@ -7,6 +7,7 @@ const apiUrl = import.meta.env.VITE_DB_URL;
 
 const Addtodo = ({ onAdd }) => {
   const [todo, setTodo] = useState("");
+  const inputRef = useRef(null);
 
   const handleAdd = async () => {
     if (!apiUrl) {
@@ -21,6 +22,7 @@ const Addtodo = ({ onAdd }) => {
 
       onAdd(response.data);
       setTodo("");
+      inputRef.current.focus();
     } catch (err) {
       console.log(err);
     }
@@ -29,7 +31,9 @@ const Addtodo = ({ onAdd }) => {
   return (
     <div>
       <input
+        ref={inputRef}
         type="text"
+        autoFocus
         value={todo}
         placeholder="Enter Task"
         onChange={(e) => setTodo(e.target.value)}
