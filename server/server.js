@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-// const cors = require("cors");
+const cors = require("cors");
 const TodoModel = require("./Models/Todos");
 
 const app = express();
@@ -10,7 +10,16 @@ const PORT = process.env.PORT;
 const mongoUrl = process.env.MONGO_ATLAS_URL;
 
 app.use(express.json());
-// app.use(cors());
+
+const corsOptions = {
+  origin: ["https://todolist-mern-frontend.vercel.app"],
+  method: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 200,
+  credentials: true,
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 mongoose
   .connect(`${mongoUrl}`)
